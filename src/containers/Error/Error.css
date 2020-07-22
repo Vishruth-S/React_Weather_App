@@ -1,0 +1,13 @@
+.errordiv {
+    position: absolute;
+    top: 50%;
+    font-size: 20px;
+    left: 46%;
+    margin-left: -80px;
+}
+
+@media (max-width: 500px) {
+    .errordiv {
+        left: 40%;
+    }
+}

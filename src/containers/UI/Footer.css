@@ -1,0 +1,48 @@
+.footer {
+    position: absolute;
+    color: #cacaca83;
+    top: 94%;
+    left: 43%;
+}
+
+a {
+    text-decoration: none;
+    text-decoration: underline;
+    color: #cacaca9d;
+}
+
+@media(max-width: 800px)
+{
+    .footer {
+        left: 30%;
+    }
+}
+
+@media(max-width: 500px)
+{
+    .footer {
+        left: 20%;
+        top: 95%;
+    }
+}
+
+@media screen and (max-height:900px) and  (max-width: 500px){
+    .footer {
+        left: 20%;
+        top: 100%;
+    }
+}
+
+@media screen and (max-height:700px) {
+    .footer {
+        left: 20%;
+        top: 105%;
+    }
+}
+
+@media screen and (max-height:600px) {
+    .footer {
+        left: 20%;
+        top: 118%;
+    }
+}

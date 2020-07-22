@@ -1,0 +1,13 @@
+.navbar-brand {
+    margin: auto;
+    padding-right: 320px;
+}
+
+.navbar {
+    height: 60px;
+    overflow: hidden;
+}
+
+.logo {
+    height: 35px;
+}

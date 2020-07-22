@@ -1,0 +1,28 @@
+.weather-main {
+    width: 400px;
+    margin: auto;
+    text-align: center;
+    margin-top: 30px;
+    height: 570px;
+    color: white;
+    box-shadow: 1px 6px 19px 9px #00000070;
+    transition: ease 1s;
+}
+
+@media(max-width: 420px) {
+    .weather-main {
+        width: 330px;
+    }
+}
+
+@media(max-width: 370px) {
+    .weather-main {
+        width: 320px;
+    }
+}
+
+@media(max-width: 330px) {
+    .weather-main {
+        width: 280px;
+    }
+}

@@ -1,0 +1,21 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+.main {
+    /* width: 400px; */
+    margin: auto;
+    text-align: center;
+    /* margin-top: 20px; */
+    color: white;
+}
+
+@media (max-width: 500px) {
+    .main {
+        width: 400px;
+    }
+}
+
+.Loading-icon {
+    margin-top: 40px;
+}
