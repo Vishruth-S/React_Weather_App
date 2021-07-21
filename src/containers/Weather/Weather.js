@@ -7,6 +7,8 @@ import WeatherDisplay from '../WeatherDisplay/WeatherDisplay'
 import Error from '../Error/Error'
 import './Weather.css'
 
+
+
 class Weather extends Component {
   state = {
     search: '',
@@ -99,7 +101,7 @@ class Weather extends Component {
       return ts
     }
 
-    trackPromise(axios.get('http://api.weatherapi.com/v1/forecast.json?key=d0c1e9b30aef451789b152051200907&q=' + this.state.search + "&days=3")
+    trackPromise(axios.get('https://api.weatherapi.com/v1/forecast.json?key=d0c1e9b30aef451789b152051200907&q=' + this.state.search + "&days=3")
       .then(res => {
         // console.log(res);
         const weathermain = res.data.current.condition.text;

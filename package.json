@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.21.1",
     "bootstrap": "^4.5.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-favicon": "^2.0.1",
     "font-awesome": "^4.7.0",
@@ -29,9 +30,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm build",
+    "predeploy": "npm run-script build",
     "deploy": "gh-pages -d build"
   },
+  "proxy": "https://vishruth-s.github.io/React_Weather_App",
   "eslintConfig": {
     "extends": "react-app"
   },
