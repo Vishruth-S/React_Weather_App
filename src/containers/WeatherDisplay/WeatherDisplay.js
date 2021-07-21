@@ -3,27 +3,14 @@ import './WeatherDisplay.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWind } from '@fortawesome/free-solid-svg-icons'
-// import imgs from '../../Assets/imgs'
-// import svg from '../../Assets/imgs/day.svg'
-// import fog from '../../Assets/imgs/fog.gif'
-
-
 
 const Weather = (props) => {
-    // let disp = !props.data.temp && !props.data.errmessage ? "none" : "block"
-    // let disp = props.errdisplay=="block" ? "none" : "block"
     let disp = "none"
     if (props.errdisplay === "block" || !props.data.temp) {
         disp = "none"
     } else {
         disp = "block"
     }
-    // console.log(props.errdisplay)
-    // console.log(disp)
-    // console.log(props.data.errmessage)
-    // console.log(props.data.temp)
-    // console.log(disp)
-    // console.log(props.data.background)
     return (
         <div className={props.data.background + " weather-main"} style={{ display: disp }}>
             <div className="location">
@@ -39,13 +26,13 @@ const Weather = (props) => {
                 <div className="desc">
                     <div>
                         {/* {props.data.background ? <img src={require('../../Assets/imgs/'+props.data.background+".png")} alt=" " /> : null} */}
-                        {props.data.background ? <img src={require(`../../Assets/imgs/svgs/${props.data.background}.svg`)} alt=" " className='filter-white svgs'/> : null}
+                        {props.data.background ? <img src={require(`../../Assets/imgs/svgs/${props.data.background}.svg`)} alt=" " className='filter-white svgs' /> : null}
                         <div className="weatherText">{props.data.weatherMain}</div>
                     </div>
                     {/* <img src = {svg} className='filter-white'/> */}
                 </div>
                 <div className="tempMainCol">
-                        {props.data.temp}<span className="celsiusMain">C</span>
+                    {props.data.temp}<span className="celsiusMain">C</span>
                 </div>
                 <div className="tempSubCol">
                     <div>
@@ -64,7 +51,7 @@ const Weather = (props) => {
                     <i className="fa fa-cloud"></i><span> {props.data.cloud}%</span>
                 </div>
                 <div className="col-4">
-                    <FontAwesomeIcon icon={ faWind } />
+                    <FontAwesomeIcon icon={faWind} />
                     <span> {props.data.windSpeed}km/h</span>
                 </div>
             </div>
