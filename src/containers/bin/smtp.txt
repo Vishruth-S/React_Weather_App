@@ -1,0 +1,18 @@
+1. Initialize a UDF based socket connection from client to server
+2. Client sends greeting messages to server
+3. A greeting message with code 220 is sent from server to client
+4. HELLO is sent from client to server to introduce itself
+5. Server responds with code 250 and its name
+6. MAIL FROM is sent from client to server describing name of the sender of the
+email.
+7. OK from server with code 250 is sent to convey that the sender email address
+has been accepted.
+8. RCPT TO is sent from client to server describing recipient name.
+9. OK from server with 250 is sent to convey acceptance of recipient email
+address.
+10. Data is sent from Client to Server to denote start of the email body.
+11. Go ahead with body of email message is send from server with code 354.
+12. Body of email is sent from client to server.
+13. OK received from the server.
+14. QUIT received from Client to Server.
+15. Response to QUIT sent from server with code 221.

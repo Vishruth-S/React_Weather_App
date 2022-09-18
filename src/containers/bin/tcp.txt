@@ -1,0 +1,16 @@
+Server Algorithm:-
+1. Create a socket with type as SOCK_STREAM to create a tcp socket using socket()
+system call.
+2. Bind the socket to a specific port using bind() system call.
+3. Listen for new connections using the listen() system call.
+4. Accept connection from client process into a temporary socket.
+5. Read the message from the client using the recv() system call into a buffer.
+6. Display the message and close the socket.
+
+Client Algorithm:-
+1. Create a socket with type as SOCK_STREAM to create a tcp socket using socket()
+system call.
+2. Connect to the server using connect() system call.
+3. Read the message to be sent from the user.
+4. Send the message to the server using send() system call.
+5. Close the socket

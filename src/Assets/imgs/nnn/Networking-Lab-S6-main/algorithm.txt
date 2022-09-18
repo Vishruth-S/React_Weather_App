@@ -1,0 +1,134 @@
+Algorithm - TCP
+Client
+1. Create a socket
+2. Connect the socket to the server
+3. Read the string to be reversed from the standard input and send it to the server
+Read the matrices from the standard input and send it to the server using the socket
+4. Read the reversed string from the socket and display it on the standard output
+Read the product matrix from the socket and display it on the standard output
+5. Close the socket
+Server
+1. Create a listening socket
+2. bind IP address and port number to the socket
+3. listen for incoming requests on the listening socket
+4. accept the incoming request
+5. connection socket is created when accepting returns
+6. Read the string using the connection socket from the client
+7. Reverse the string
+8. Send the string to the client using the connection socket
+9. close the connection socket
+10. close the listening socket
+
+Algorithm- UDP
+
+Client
+1. Create a socket
+2. Read the matrices from the standard input and send it to the server using the socket
+3. Read the product matrix from the socket and display it on the standard output
+4. Close the socket
+Server
+1. Create a socket
+2. bind IP address and port number to the socket
+3. Read the matrices socket from the client using the socket
+4. Find the product of matrices
+5. Send the product matrix to the client using socket
+6. close the socket
+
+Link-State Routing Algorithm:
+(It is the Dijkstra algorithm. This algorithm finds the shortest (least cost paths) from the source u to
+every other node in the network.
+D(v): cost of the least cost path from the source node to the destination node v as of this iteration of the
+algorithm
+p(v): previous node of v along the current least cost path from the source to v
+N': a subset of nodes. v is in N'
+if the least cost path from the source to v is definitely known
+
+Initialization :
+N' = {u}
+
+for all nodes v
+    if v is a neighbor of u
+        then D(v) = c(u,v)
+    else
+        D(v) = ∞
+do {
+    find w, not in N'
+    such that D(w) is a minimum
+    add w to N'
+    update D(v) for each neighbor v of w and not in N'.
+
+    D(v) = min{D(v) , D(w) + c(w,v)}
+} while ( N'!= N)
+
+Algorithm - Leaky Bucket
+
+Step 1: Input the bucket size, outgoing rate, and no of inputs
+Step 2: While n is not equal to 0,
+Step 3: Input the incoming packet size
+Step 4: Print the incoming packet size
+Step 5: If the incoming packet size is less than or equal to the bucket size - store,
+Step 6: Add the incoming packet size to the store
+Step 7: Print the bucket buffer size and the store
+Step 8: Subtract the outgoing rate from the store
+Step 9: If the store is less than 0,
+Step 10: Set the store to 0
+Step 11: Print the after outgoing packets left out of the bucket buffer size and the store
+Step 12: Subtract 1 from n
+Step 13: End while
+Step 14: End program
+
+
+Algorithm - STOP AND WAIT
+
+Step 1: Start the program
+Step 2: import all the necessary libraries
+Step 3: Create 2 Application client and server
+Step 4: Connect both Application using socket
+Step 5: Sender frame is sent to the receiver and displayed by the receiver
+Step 6: Receiver sends the acknowledgement to the sender if the frame is received else negative acknowledgement is sent
+Step 7: Sender waits for the acknowledgement from the receiver
+Step 8: If the acknowledgement is received then the sender sends the next frame
+Step 9: If the negative acknowledgement is received then the sender sends the same frame again
+Step 10: End program
+
+
+Algorithm - Time Server Application - UDP
+
+Server side
+Step 1: Start the program
+Step 2: create a socket with the help of socket() function
+Step 3: bind the socket to the address and port number using the bind() function
+Step 4: listen for the incoming requests using the listen() function
+Step 5: receive request from the client using the recvfrom() function
+Step 6: send the current time to the client using the sendto() function
+Step 7: close the socket
+
+Client side
+Step 1: Start the program
+Step 2: Send a request to the server asking for the current time
+Step 3: Receive the current time from the server using the recvfrom() function
+Step 4: Display the current time on the screen
+Step 5: close the socket
+
+
+
+Algorithm - FTP
+
+Server side
+Step 1: Start the program
+Step 2: create a socket with the help of socket() function
+Step 3: bind the socket to the address and port number using the bind() function
+Step 4: listen for the incoming requests using the listen() function and accept the incoming request
+Step 5: receive ffile name from the client using the recvfrom() function
+Step 6: if the file exists then read the file and send it to the client using the sendto() function
+Step 7: else send the error message to the client
+Step 8: close the socket
+
+Client side
+Step 1: Start the program
+Step 2: create a socket with the help of socket() function
+Step 3: Send the file name to the server using the sendto() function
+Step 4: Receive the file from the server using the recvfrom() function
+Step 5: Display the file on the screen
+Step 6: close the socket
+

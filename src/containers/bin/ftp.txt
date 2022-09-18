@@ -1,0 +1,26 @@
+--- server ---
+
+1. Create socket using socket() system call with address family AF_INET, type
+SOCK_STREAM and default protocol.
+2. Bind server address and port using bind() system call.
+3. Wait for client connection to complete accepting connections using accept()
+system call.
+4. Receive the client file using recv() system call.
+5. Using fgets (char *str, int n, FILE *stream) function, we need a line of text
+from the specified stream and store it into the string pointed by str. It stops
+when either (n-1) characters are read or when the end of file is reached.
+6. On successful execution is when the file pointer reaches the end of file, file
+transfer “completed” message is sent by server to accepted client connection.
+
+--- client ---
+
+1. Create socket using socket() system call with address family AF_INET, type
+SOCK_STREAM and default protocol.
+2. Enter the client port number.
+3. Fill in the internal socket address structure
+4. Connect to the server address using connect() system call.
+5. Read the existing and new file name from the user.
+6. Send existing file to server using send() system call.
+7. Receive feedback from server “completed” regarding file transfer completion.
+8. Write file is transferred to the standard output stream.
+9. Close the socket connection and file pointer
