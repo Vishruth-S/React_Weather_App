@@ -1,125 +1,60 @@
------- Go-Back-N Sender Algorithm --------
-begin
- frame s; //s denotes frame to be sent
- frame t; //t is temporary frame
- S_window = power(2,m) – 1; //Assign maximum window size
- SeqFirst = 0; // Sequence number of first frame in window
- SeqN = 0; // Sequence number of Nth frame window
- while (true) //check repeatedly
- do
- Wait_For_Event(); //wait for availability of packet
- if ( Event(Request_For_Transfer)) then
- //check if window is full
- if (SeqN–SeqFirst >= S_window) then
- doNothing();
- end if;
- Get_Data_From_Network_Layer();
- s = Make_Frame();
- s.seq = SeqN;
- Store_Copy_Frame(s);
- Send_Frame(s);
- Start_Timer(s);
- SeqN = SeqN + 1;
- end if;
- i = i + 1;
- usleep(1000);
-qqq:bzero(buff2, sizeof(buff2));
- strcpy(buff2, msg);
- buff2[strlen(msg)] = i + '0';
- printf("Message sent to client: %s \n", buff2);
- write(c_sock, buff2, sizeof(buff2));
- FD_ZERO(&set1);
- FD_SET(c_sock, &set1);
- timeout1.tv_sec = 2;
- timeout1.tv_usec = 0;
- rv1 = select(c_sock + 1, &set1, NULL, NULL, &timeout1);
- if (rv1 == -1)
- perror("select error ");
- else if (rv1 == 0)
- {
- printf("Going back from %d: timeout \n", i);
- i = i - 3;
- goto qq;
- }
- else
- {
- read(c_sock, buff, sizeof(buff));
- printf("Message from Client: %s\n", buff);
- i++;
- if (i <= 9)
- goto qqq;
- }
-qq2:FD_ZERO(&set2);
- FD_SET(c_sock, &set2);
- timeout2.tv_sec = 3;
- timeout2.tv_usec = 0;
- rv2 = select(c_sock + 1, &set2, NULL, NULL, &timeout2);
- if (rv2 == -1)
- perror("select error "); // an error accured
- else if (rv2 == 0)
- {
- printf("Going back from %d:timeout on last 2\n", i - 1);
- i = i - 2;
- bzero(buff2, sizeof(buff2));
- strcpy(buff2, msg);
- buff2[strlen(buff2)] = i + '0';
- write(c_sock, buff2, sizeof(buff2));
- usleep(1000);
- bzero(buff2, sizeof(buff2));
- i++;
- strcpy(buff2, msg);
- buff2[strlen(buff2)] = i + '0';
- write(c_sock, buff2, sizeof(buff2));
- goto qq2;
- } // a timeout occured
- else
- {
- read(c_sock, buff, sizeof(buff));
- printf("Message from Client: %s\n", buff);
- bzero(buff, sizeof(buff));
- read(c_sock, buff, sizeof(buff));
- printf("Message from Client: %s\n", buff);
- }
- if ( Event(Frame_Arrival) then
- r = Receive_Acknowledgement();
- if ( AckNo > SeqFirst && AckNo < SeqN ) then
- while ( SeqFirst <= AckNo )
- Remove_copy_frame(s.seq(SeqFirst));
- SeqFirst = SeqFirst + 1;
- end while
- Stop_Timer(s);
- end if
- end if
- // Resend all frames if acknowledgement havn’t been received
- if ( Event(Time_Out)) then
- TempSeq = SeqFirst;
- while ( TempSeq < SeqN )
- t = Retrieve_Copy_Frame(s.seq(SeqFirst));
- Send_Frame(t);
- Start_Timer(t);
- TempSeq = TempSeq + 1;
- end while
- end if
-end
+------ client -----
 
------- Go-Back-N Reciever Algorithm --------
+sw = 2m-1
+sf = sn = 0
+while True do
+    Wait_For_Event
+    if Event (RequestToSend) then
+        if sn-sf >= sw then
+            sleep()
+        end if
+        getData()
+        makeFrame(sn)
+        storeFrame(sn)
+        sendFrame(sn)
+        sn = (sn+1)%n
+        if timer is not running then
+            startTimer()
+        end if
+    end if
+    if event(arrivalNotification) then
+        recieve(ack)
+        if corrupted(ack) then
+            sleep()
+        end if
+        if ackno >= sf and ackno <= Sn then
+            while sf < ackno do
+                purgeFrame(sn)
+                sf = (sf+1)%sn
+            end while
+        end if
+        stoptimer()
+    end if
+    if(Event(timeout)) then
+        startTimer()
+        temp = sf
+        while temp < sn do
+            sendFrame(sn)
+            sf = (sf+1)%sn
+        end while
+    end if
+end if
+end while
 
-begin
- frame f;
- RSeqNo = 0; // Initialise sequence number of expected frame
- while (true) //check repeatedly
- do
- Wait_For_Event(); //wait for arrival of frame
- if ( Event(Frame_Arrival) then
- Receive_Frame_From_Physical_Layer();
- if ( Corrupted ( f.SeqNo )
- doNothing();
- else if ( f.SeqNo = RSeqNo ) then
- Extract_Data();
- Deliver_Data_To_Network_Layer();
- RSeqNo = RSeqNo + 1;
- Send_ACK(RSeqNo);
- end if
- end if
- end while
-end
+----- server ------
+
+rn = 0
+while True do
+    waitforEvent()
+    if event(arrivalNotification) then
+        recieveFrame()
+        if corrrupted(frame) then
+            sleep()
+        end if
+        if seqno == rn then
+            DeliverData()
+            rn = (rn+1)%2^m
+        end if
+        sendAck(rn)
+    end if
+end while
