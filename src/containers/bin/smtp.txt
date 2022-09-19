@@ -1,18 +1,22 @@
-1. Initialize a UDF based socket connection from client to server
-2. Client sends greeting messages to server
-3. A greeting message with code 220 is sent from server to client
-4. HELLO is sent from client to server to introduce itself
-5. Server responds with code 250 and its name
-6. MAIL FROM is sent from client to server describing name of the sender of the
-email.
-7. OK from server with code 250 is sent to convey that the sender email address
-has been accepted.
-8. RCPT TO is sent from client to server describing recipient name.
-9. OK from server with 250 is sent to convey acceptance of recipient email
-address.
-10. Data is sent from Client to Server to denote start of the email body.
-11. Go ahead with body of email message is send from server with code 354.
-12. Body of email is sent from client to server.
-13. OK received from the server.
-14. QUIT received from Client to Server.
-15. Response to QUIT sent from server with code 221.
+---- server ---
+1. Create a socket with type as SOCK_DGRAM to create a udp socket using socket() system call.
+2. Bind socket to a specific port using bind()
+3. Recieve first packet from client using recvfrom() and reply with status code 220, with fully qualified name.
+4. Recieve HELO command with fully qualified domain name from client using recvfrom() and 250 stattus code.
+5. Recieve MAIL command with FROM address from client using recvfrom() and 250 status code
+6. Recieve RCPT command with TO address from client using recvfrom() and 250 status code
+7. Recieve DATA command from client using recvfrom() and status code 354
+8. Recieve mail body from the client using recvfrom()
+9. Recieve QUIT command from client using recvfrom() and respond status code 221.
+10. Close socket
+
+---- client ---
+1. Create a socket with type as SOCK_DGRAM to create a udp socket using socket() system call.
+2. Send an initial message to the server using sendto() and expect a response with status code 220 and fully qualified domain name of the server
+3. Send a HELO command to the server using sendto() with fully qualified name and expect 250 status code
+4. Send MAIL command along with FROM address to the server using sendto() and expect 250 status code
+5. Send RCPT command along with TO address to the server using sendto() and expect 250 status code
+6. Send DATA command to server using sendto() and expect 350 status code
+7. Read body of mail from user and send it to server using sendto()
+8. Send QUIT command to the server using sendto() and expect 221 status code
+9. Close socket
