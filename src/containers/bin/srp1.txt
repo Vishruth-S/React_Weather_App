@@ -1,0 +1,78 @@
+#include<stdio.h>
+#include<string.h>
+
+char stack[50], input[50];
+int len, top = -1;
+
+
+void printDetails(int idx, char* action)
+{
+    printf("$");
+    for(int i=0;i<=top;i++)
+        printf("%c",stack[i]);
+    printf("\t\t");
+    for(int i=idx;i<len;i++)
+        printf("%c",input[i]);
+    printf("$\t\t%s\n",action);
+}
+
+void checkReduce(int idx)
+{
+    int flag = 1;
+    while(flag == 1)
+    {
+        flag = 0;
+
+        if(stack[top-2]=='E' && stack[top-1]=='+'&& stack[top]=='E')
+        {
+            printDetails(idx+1,"REDUCE");
+            stack[top-2] = 'E';
+            top = top - 2;
+            flag = 1;
+        }
+        else if(stack[top-2]=='E' && stack[top-1]=='*'&& stack[top]=='E')
+        {
+            printDetails(idx+1,"REDUCE");
+            stack[top-2] = 'E';
+            top = top - 2;
+            flag = 1;
+        }
+        else if(stack[top-2]=='(' && stack[top-1]=='E'&& stack[top]==')')
+        {
+            printDetails(idx+1,"REDUCE");
+            stack[top-2] = 'E';
+            top = top - 2;
+            flag = 1;
+        }
+
+        else if(stack[top]=='i')
+        {
+            
+            printDetails(idx+1,"REDUCE");
+            stack[top] = 'E';
+            flag = 1;
+        }
+    }
+}
+
+void main()
+{
+    printf("\nThe Grammer is:\nE -> E + E\nE -> E * E\nE -> ( E )\nE->i");
+    printf("\n\nEnter the input: ");
+    scanf("%s",input);
+    len = strlen(input);
+
+    printf("\nStack\t\tInput\t\tAction\n");
+    for(int i=0;i<len;i++)
+    {
+        printDetails(i,"SHIFT");         
+        top++;
+        stack[top] = input[i];
+        checkReduce(i);   
+    }
+
+    if(top == 0 && stack[0] == 'E')
+        printf("\nInput Accepted");
+    else
+        printf("\nInput Rejected");
+}

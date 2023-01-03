@@ -1,7 +1,0 @@
-1. Start.
-2. Set the bucket size on the buffer size.
-3. Set the output rate.
-4. Transmit the packet such that there is no overflow.
-5. Repeat the process of transmission at the output rate until all packets are
-transmitted (reject packets where its size is greater than the bucket size).
-6. Stop.

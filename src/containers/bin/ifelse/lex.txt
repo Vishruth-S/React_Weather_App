@@ -1,0 +1,21 @@
+%{
+    //Definition section
+    #include<stdio.h>
+    #include<string.h>
+    #include<stdlib.h>
+    #include "ifelse.tab.h"
+%}
+st [a-z0-9]*
+%%
+if return IF;
+else return ELSE;
+{st} return STATEMENT;
+{st}<{st} return CONDITION;
+[(,),{,},;] return yytext[0];
+[\t] ;
+[\n] ;
+. yyerror();
+%%
+int yywrap(){
+    return 1;
+}
