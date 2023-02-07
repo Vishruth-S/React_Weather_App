@@ -1,0 +1,6 @@
+int main()
+{
+    //hello nope
+    // ok bye
+    int a,b,c;
+}
