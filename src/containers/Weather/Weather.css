@@ -1,28 +1,158 @@
 .weather-main {
-    width: 400px;
-    margin: auto;
-    text-align: center;
-    margin-top: 30px;
-    height: 570px;
-    color: white;
-    box-shadow: 1px 6px 19px 9px #00000070;
-    transition: ease 1s;
+  width: 400px;
+  margin: auto;
+  text-align: center;
+  margin-top: 30px;
+  height: 570px; /* Keep this height for the overall card */
+  color: white;
+  box-shadow: 1px 6px 19px 9px #00000070;
+  transition: ease 1s;
+
+  perspective: 1000px; /* Gives the 3D effect */
 }
 
-@media(max-width: 420px) {
-    .weather-main {
-        width: 330px;
-    }
+@media (max-width: 420px) {
+  .weather-main {
+    width: 330px;
+  }
 }
 
-@media(max-width: 370px) {
-    .weather-main {
-        width: 320px;
-    }
+@media (max-width: 370px) {
+  .weather-main {
+    width: 320px;
+  }
 }
 
-@media(max-width: 330px) {
-    .weather-main {
-        width: 280px;
-    }
+@media (max-width: 330px) {
+  .weather-main {
+    width: 280px;
+  }
+}
+
+/* Flip Card styles */
+.weather-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.weather-main.is-flipped .weather-card-inner {
+  transform: rotateY(180deg);
+}
+
+.weather-card-front,
+.weather-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 0;
+  box-sizing: border-box;
+}
+
+.weather-card-front {
+  background-color: transparent;
+}
+
+.weather-card-back {
+  background-color: rgba(0, 0, 0, 0.7);
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align content to the top */
+  align-items: center;
+  padding-top: 20px; /* Add some padding at the top */
+}
+
+.forecast-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Reduced gap between forecast days */
+  align-items: center;
+  margin-top: 10px; /* Reduced top margin */
+  width: 90%;
+  max-height: calc(100% - 70px); /* Adjust based on button height + padding */
+  overflow-y: auto; /* Allow scrolling if content overflows */
+  padding-bottom: 10px; /* Padding for scrollable content */
+}
+
+.forecast-details::-webkit-scrollbar {
+    width: 5px; /* Width of the scrollbar */
+}
+
+.forecast-details::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Color of the scrollbar track */
+    border-radius: 10px;
+}
+
+.forecast-details::-webkit-scrollbar-thumb {
+    background: #888; /* Color of the scrollbar thumb */
+    border-radius: 10px;
+}
+
+.forecast-details::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Color of the scrollbar thumb on hover */
+}
+
+
+.forecast-day {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 8px; /* Reduced padding */
+  border-radius: 8px;
+  width: 85%; /* Slightly increased width for content */
+  display: flex; /* Use flexbox for inner layout */
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items horizontally */
+  box-sizing: border-box; /* Include padding in width */
+}
+
+.forecast-day h4 {
+  margin: 5px 0 3px 0; /* Reduced margins for title */
+  font-size: 1em; /* Smaller font size for day */
+}
+
+.forecast-day img {
+  width: 40px; /* Smaller icon size */
+  height: 40px;
+  margin-bottom: 3px; /* Reduced margin below icon */
+}
+
+.forecast-day p {
+  margin: 0; /* Remove default paragraph margins */
+  font-size: 0.85em; /* Smaller font size for text */
+}
+
+.forecast-button {
+  background-color: #71b62b;
+  color: white;
+  border: none;
+  padding: 8px 15px; /* Smaller padding for button */
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 15px; /* Ensure button is visible at the bottom */
+  font-size: 14px; /* Smaller font size for button */
+  transition: background-color 0.3s ease;
+}
+
+.forecast-button:hover {
+  background-color: #5a9122;
+}
+
+/* Existing styles below */
+.weather-details-section {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+}
+
+.detail-item {
+  text-align: center;
 }
